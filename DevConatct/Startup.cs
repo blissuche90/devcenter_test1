@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DevConatct.Data;
+using DevConatct.Infrastructure;
+using DevConatct.Model;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -34,8 +37,15 @@ namespace DevConatct
             });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.Configure<Settings>(options =>
+            {
+                options.ConnectionString = Configuration.GetSection("MongoConnection:ConnectionString").Value;
+                options.Database = Configuration.GetSection("MongoConnection:Database").Value;
+            });
 
-           
+            services.AddTransient<IDevContactRepository, DevContactRepository>();
+
+
 
         }
 
