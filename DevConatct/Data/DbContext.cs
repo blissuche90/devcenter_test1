@@ -18,6 +18,6 @@ namespace DevConatct.Data
             if (client != null)
                 _database = client.GetDatabase(settings.Value.Database);
         }
-
+        public IMongoCollection<DevContact> DevContacts => _database.GetCollection<DevContact>("DevContact");
     }
 }
