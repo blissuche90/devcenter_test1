@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace DevConatct.Controllers
 {
     [Route("api/[controller]")]
-    //[Authorize]
+    [Authorize]
     [ApiController]
     public class FleetController : ControllerBase
     {
