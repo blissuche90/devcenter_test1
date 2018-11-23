@@ -15,7 +15,7 @@ namespace DevContact.Domain
             {
                 var builder = new DbContextOptionsBuilder<SQLDBContext>();
 #if DEBUG
-                builder.UseSqlServer("Server=UCHECHUKWU\\SQLEXPRESS;Database=DaveCentreDb;Trusted_Connection=True;",
+                builder.UseSqlServer("Server=XXXXXXXXX\\SQLEXPRESS;Database=DaveCentreDb;Trusted_Connection=True;",
                     optionsBuilder => optionsBuilder.MigrationsAssembly(typeof(SQLDBContext).GetTypeInfo().Assembly
                         .GetName().Name));
 #else
