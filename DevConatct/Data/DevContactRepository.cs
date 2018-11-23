@@ -41,7 +41,7 @@ namespace DevConatct.Data
             {
                 ObjectId internalId = GetInternalId(id);
                 return await _context.DevContacts
-                                .Find(note => note.Id == id || note.InternalId == internalId)
+                                .Find(contact => contact.Id == id || contact.InternalId == internalId)
                                 .FirstOrDefaultAsync();
             }
             catch (Exception ex)
@@ -51,7 +51,20 @@ namespace DevConatct.Data
             }
         }
 
-        
+        public async Task<DevContact> GetCatgory(int id)
+        {
+            try
+            {               
+                return await _context.DevContacts
+                    .Find(note => note.Type == id)
+                    .FirstOrDefaultAsync();
+            }
+            catch (Exception ex)
+            {
+                // log or manage the exception
+                throw ex;
+            }
+        }
 
         // Try to convert the Id to a BSonId value
         private ObjectId GetInternalId(string id)

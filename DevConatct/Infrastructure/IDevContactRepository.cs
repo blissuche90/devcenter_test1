@@ -12,6 +12,7 @@ namespace DevConatct.Infrastructure
 
         Task<DevContact> Get(string id);
 
+        Task<DevContact> GetCatgory(int id);
         // query after multiple parameters
         //Task<IEnumerable<T>> GetNote(string bodyText, DateTime updatedFrom, long headerSizeLimit);
 
