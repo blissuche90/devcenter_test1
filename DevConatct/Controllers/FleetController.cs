@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using DevConatct.Infrastructure;
 using DevConatct.Model;
+using DevContact.Domain.Abstract;
+using DevContact.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DevConatct.Controllers
@@ -12,45 +14,40 @@ namespace DevConatct.Controllers
     [ApiController]
     public class FleetController : ControllerBase
     {
-        private List<Car> defaultlist = null;
-        public FleetController()
+        private ICarRepository _carRepo = null;
+
+        public FleetController(ICarRepository repo)
         {
-            defaultlist = new List<Car>{
-                new Car
-                {
-                    Ownername = "Adedeji Obi",
-                    Registration = "AB-4568-OKJ",
-                    Id = "5675ff78t757577",
-                    Type = 1
-                },
-                new Car
-                {
-                    Ownername = "Curator Uche",
-                    Registration  = "LG-6765-IKJ",
-                    Id = "54647478t757577",
-                    Type = 2
-                }
-            };
+            this._carRepo = repo;
         }
+
         [NoCache]
         [HttpGet]
-        public List<Car> Get()
-        {           
-            return defaultlist.ToList();
+        public async Task<IEnumerable<Car>> Get()
+        {
+            return _carRepo.Query().ToList();
+
         }
-        // GET api/Fleet/GetCategory/id
-        // GET api/Fleet/5
+
+        // GET api/Fleet/GetCategory/id       
         [HttpGet("{id}")]
         public async Task<Car> Get(string id)
         {
-            return (from c in defaultlist where c.Id == id select c).FirstOrDefault() ?? new Car();
+            return await _carRepo.GetAsync(id) ?? new Car();
 
+        }
+
+        // GET api/Fleet/GetCategory/id       
+        [HttpGet("{id}")]
+        public async Task<Car> Get(int id)
+        {
+            return await _carRepo.GetCatAsync(id) ?? new DevContact.Domain.Entities.Car();
 
         }
 
         // PUT api/Fleet/value
         [HttpPut("{id}")]
-        public void Put([FromBody]string value)
+        public void Put([FromBody] string value)
         {
             //_devRepo.Update(()value);
         }
@@ -59,7 +56,7 @@ namespace DevConatct.Controllers
         [HttpDelete("{id}")]
         public void Delete(string id)
         {
-            //_devRepo.Remove(id);
+            _carRepo.RemoveAsync(id);
         }
     }
 }

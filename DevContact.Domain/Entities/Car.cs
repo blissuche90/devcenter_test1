@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace DevConatct.Model
+﻿namespace DevContact.Domain.Entities
 {
     public class Car:BaseEntity
     {
