@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 using DevConatct.Infrastructure;
 using DevConatct.Model;
 using DevContact.Domain.Abstract;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DevConatct.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
     public class DeveloperController : ControllerBase
     {
@@ -31,15 +33,16 @@ namespace DevConatct.Controllers
         }
 
         // GET api/Developer/GetCategory/id
-        [HttpGet("{id}")]
+        [HttpGet("GetCat/{id}")]
         public async Task<DevContact.Domain.Entities.DevContact> GetCategory(int id)
         {
             return await _devRepo.GetCatAsync(id) ?? new DevContact.Domain.Entities.DevContact();
 
 
         }
-        // GET api/Developer/5
-        [HttpGet("{id}")]
+        // GET api/Developer/Get/id
+       
+        [HttpGet("Get/{id}")]
         public async Task<DevContact.Domain.Entities.DevContact> Get(string id)
         {
             return await _devRepo.GetAsync(id) ?? new DevContact.Domain.Entities.DevContact();
@@ -48,14 +51,14 @@ namespace DevConatct.Controllers
         }
 
         // PUT api/Developer/value
-        [HttpPut("{id}")]
-        public void Put([FromBody]string value)
+        [HttpPut("Update/{id}")]
+        public void Put([FromBody]DevContact.Domain.Entities.DevContact value)
         {
-            //_devRepo.UpdateAsync();
+            _devRepo.UpdateAsync(value);
         }
 
         // DELETE api/Developer/23243423
-        [HttpDelete("{id}")]
+        [HttpDelete("Remove/{id}")]
         public void Delete(string id)
         {
             _devRepo.RemoveAsync(id);

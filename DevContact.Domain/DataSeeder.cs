@@ -29,15 +29,11 @@ namespace DevContact.Domain
         {
             if (!_context.Cars.Any())
             {
-
-
-
-
                 var car1 = new Car
                 {
                     Ownername = "Adedeji Obi",
                     Registration = "AB-4568-OKJ",
-                    Id = "5675ff78t757577",
+                   // Id = "5675ff78t757577",
                     Type = 1
                 };
 
@@ -45,7 +41,7 @@ namespace DevContact.Domain
                 {
                     Ownername = "Curator Uche",
                     Registration = "LG-6765-IKJ",
-                    Id = "54647478t757577",
+                   // Id = "54647478t757577",
                     Type = 2
                 };
                
@@ -66,7 +62,7 @@ namespace DevContact.Domain
                     Fullname = "Adedeji Obi",
                     Email = "uchenna@gmail.com",
                     Address = "7 Opebi Ikeja",
-                    Id = "5675ff78t757577",
+                    //Id = "5675ff78t757577",
                     Type = 1
                 };
                 var dev2 = new Entities.DevContact
@@ -74,7 +70,7 @@ namespace DevContact.Domain
                     Fullname = "Curator Uche",
                     Email = "uchenna@gmail.com",
                     Address = "7 Opebi Ikeja",
-                    Id = "54647478t757577",
+                   // Id = "54647478t757577",
                     Type = 2
                 };
                 _context.DevContacts.Add(dev1);

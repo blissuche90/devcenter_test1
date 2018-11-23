@@ -6,11 +6,13 @@ using DevConatct.Infrastructure;
 using DevConatct.Model;
 using DevContact.Domain.Abstract;
 using DevContact.Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DevConatct.Controllers
 {
     [Route("api/[controller]")]
+    //[Authorize]
     [ApiController]
     public class FleetController : ControllerBase
     {
@@ -30,7 +32,7 @@ namespace DevConatct.Controllers
         }
 
         // GET api/Fleet/GetCategory/id       
-        [HttpGet("{id}")]
+        [HttpGet("Get/{id}")]
         public async Task<Car> Get(string id)
         {
             return await _carRepo.GetAsync(id) ?? new Car();
@@ -38,7 +40,7 @@ namespace DevConatct.Controllers
         }
 
         // GET api/Fleet/GetCategory/id       
-        [HttpGet("{id}")]
+        [HttpGet("GetCat/{id}")]
         public async Task<Car> Get(int id)
         {
             return await _carRepo.GetCatAsync(id) ?? new DevContact.Domain.Entities.Car();
@@ -46,14 +48,14 @@ namespace DevConatct.Controllers
         }
 
         // PUT api/Fleet/value
-        [HttpPut("{id}")]
-        public void Put([FromBody] string value)
+        [HttpPut("Update/{id}")]
+        public void Put([FromBody] Car value)
         {
-            //_devRepo.Update(()value);
+            _carRepo.UpdateAsync(value);
         }
 
         // DELETE api/Fleet/23243423
-        [HttpDelete("{id}")]
+        [HttpDelete("Remove/{id}")]
         public void Delete(string id)
         {
             _carRepo.RemoveAsync(id);
