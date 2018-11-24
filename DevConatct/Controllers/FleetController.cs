@@ -22,6 +22,12 @@ namespace DevConatct.Controllers
         {
             this._carRepo = repo;
         }
+        // PUT api/Fleet/value
+        [HttpPut("Add/")]
+        public void Post([FromBody] Car value)
+        {
+            _carRepo.InsertAsync(value);
+        }
 
         [NoCache]
         [HttpGet]

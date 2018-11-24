@@ -31,14 +31,18 @@ namespace DevConatct.Controllers
             return _devRepo.Query().ToList();
 
         }
-
+        // PUT api/Developer/Add
+        [HttpPost("Add/")]
+        public void Post([FromBody]DevContact.Domain.Entities.DevContact value)
+        {
+            _devRepo.InsertAsync(value);
+        }
         // GET api/Developer/GetCategory/id
         [HttpGet("GetCat/{id}")]
         public async Task<DevContact.Domain.Entities.DevContact> GetCategory(int id)
         {
             return await _devRepo.GetCatAsync(id) ?? new DevContact.Domain.Entities.DevContact();
-
-
+ 
         }
         // GET api/Developer/Get/id
        
